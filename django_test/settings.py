@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['.onrender.com']# render 固定
 
 APPEND_SLASH = True # 固定
 
-CORS_ALLOW_ALL_ORIGINS = True # 專案的雲端網址
+CORS_ALLOWED_ORIGINS = ["https://sc2-myproject.onrender.com"] # 專案的雲端網址
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.messages', 
     'rest_framework',
 ]
 DATABASES = {
