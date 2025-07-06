@@ -39,17 +39,28 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
 ]
+
+# 禁用資料庫相關的Django應用
+# 移除了 django.contrib.admin, django.contrib.auth, django.contrib.contenttypes, django.contrib.sessions, django.contrib.messages
 # Middleware framework
 # https://docs.djangoproject.com/en/2.1/topics/http/middleware/
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware'
 ]
 
+# 不使用資料庫，所以將DATABASES設為空
 DATABASES = {}
+
+# 禁用資料庫遷移
+USE_TZ = True
+MIGRATION_MODULES = {
+    'app': None,
+}
 
 ROOT_URLCONF = 'django_test.urls'
 
@@ -100,3 +111,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+# WhiteNoise 靜態文件設置（用於Render部署）
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
